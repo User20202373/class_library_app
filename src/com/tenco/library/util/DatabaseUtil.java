@@ -37,7 +37,7 @@ public class DatabaseUtil {
         System.out.println(connection.getMetaData().getDatabaseProductVersion());
         return connection;
     }
-
+    // 수정
     //TODO - 삭제예정
     //테스트 코드 작성
     public static void main(String[] args) {
