@@ -80,20 +80,20 @@ public class StudentDAO {
 
     // 학생 이름 학번수정하기
     //1. 학생 이름 학번 입력후 학생 있는지 찾기
-    public Student getStudentInfo(String name, String studentId) throws SQLException {
-        String infoSql = """
-                SELECT id
-                  FROM students
-                  WHERE name = ? AND student_id = ?
-                """;
-
-        try (Connection conn = DatabaseUtil.getConnection();
-        PreparedStatement infoPstmt = conn.prepareStatement(infoSql)) {
-
-        }
-
-
-    }
+//    public Student getStudentInfo(String name, String studentId) throws SQLException {
+//        String infoSql = """
+//                SELECT id
+//                  FROM students
+//                  WHERE name = ? AND student_id = ?
+//                """;
+//
+//        try (Connection conn = DatabaseUtil.getConnection();
+//        PreparedStatement infoPstmt = conn.prepareStatement(infoSql)) {
+//            infoPstmt.setString(1,"name");
+//        }
+//
+//
+//    }
     //2. 해당 학생 이름 수정하기
 
     //2. 해당 학생 학번 수정하기
