@@ -14,4 +14,9 @@ public class Student {
     private String name;
     private String studentId;
 
+    @Builder
+    public Student(String name, String studentId){
+        this.name = name;
+        this.studentId = studentId;
+    }
 }
