@@ -79,6 +79,7 @@ public class StudentDAO {
     }
 
     // 학생 이름 학번수정하기
+
     //1. 학생 이름 학번 입력후 학생 있는지 찾기
     public Student getStudentInfo(String name, String studentId) throws SQLException {
         String infoSql = """
