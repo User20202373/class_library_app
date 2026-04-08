@@ -78,41 +78,66 @@ public class StudentDAO {
         return null;
     }
 
-    // 학생 이름 학번수정하기
+//    // 학생 이름 학번수정하기
+//    public Student modifyStudentInfo(int id, String name, String studentId) throws SQLException {
+//        Connection conn = null; // 트랜 잭션 시작
+//        try {
+//            conn = DatabaseUtil.getConnection();
+//            conn.setAutoCommit(false);
+//
+//            //1. 학생 이름 학번 입력후 학생 있는지 찾기
+//            String infoSql = """
+//                    SELECT id
+//                      FROM students
+//                      WHERE id = ?
+//                    """;
+//            int studentInfo;
+//            try (PreparedStatement infoPstmt = conn.prepareStatement(infoSql)) {
+//                infoPstmt.setInt(1, id);
+//
+//                try (ResultSet rs = infoPstmt.executeQuery()) {
+//                    if (rs.next() == false) {
+//                        throw new SQLException("등록 되지 않은 학생입니다");
+//                    }
+//                   studentInfo =rs.getInt("id");
+//                }
+//            }
+//            //2. 해당 학생 이름 수정하기
+//
+//            String modifyStudentNameSql = """
+//                    UPDATE student SET name = ?  WHERE id = ?
+//                    """;
+//
+//            try (PreparedStatement modfiyPstmt = conn.prepareStatement(modifyStudentNameSql)) {
+//                modfiyPstmt.setString(1, name);
+//                modfiyPstmt.executeUpdate();
+//            }
+//
+//
+//            // 3. 해당 학생 학번 수정하기
+//            String modifyStudentIdSql = """
+//                    UPDATE student SET student_id = ?  WHERE id = ?
+//                    """;
+//
+//            try (PreparedStatement modfiyPstmt = conn.prepareStatement(modifyStudentIdSql)) {
+//                modfiyPstmt.setString(1, studentId);
+//                modfiyPstmt.executeUpdate();
+//            }
+//            conn.commit();
+//
+//        } catch (SQLException e) {
+//            if (conn != null) {
+//                conn.rollback();
+//            }
+//            System.out.println("오류 발생 : " + e.getMessage());
+//        } finally {
+//            if (conn != null) {
+//                conn.setAutoCommit(true);
+//                conn.close();
+//            }
+//        }
+//    }
 
-    //1. 학생 이름 학번 입력후 학생 있는지 찾기
-    public Student getStudentInfo(String name, String studentId) throws SQLException {
-        String infoSql = """
-                SELECT id
-                  FROM students
-                  WHERE name = ? AND student_id = ?
-                """;
-
-        try (Connection conn = DatabaseUtil.getConnection();
-        PreparedStatement infoPstmt = conn.prepareStatement(infoSql)) {
-
-        }
-
-
-    }
-    //2. 해당 학생 이름 수정하기
-
-    //2. 해당 학생 학번 수정하기
-
-
-    public Student modifyStudentInfo(String name, String studentId, int id) throws SQLException {
-
-        String modifySql = """
-                UPDATE student SET name = ?, student_id = ? WHERE id = ?
-                """;
-        try (Connection conn = DatabaseUtil.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(modifySql)) {
-
-
-        }
-
-        return null;
-    }
 
     //ResultSet -> Student 변환 메서드
     private Student mapToStudent(ResultSet rs) throws SQLException {
