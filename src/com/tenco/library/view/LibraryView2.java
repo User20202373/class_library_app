@@ -118,10 +118,10 @@ public class LibraryView2 {
 
         if (returnBookId <= 0) {
             System.out.println("도서 ID는 0보다 작을 수 없습니다");
-            return;
+
         }else if (returnStudentId <= 0) {
             System.out.println("학생 ID는 0보다 작을 수 없습니다");
-            return;
+
         }else {
         service.returnBook(returnBookId, returnStudentId);
         System.out.println("도서 반납이 완료 되었습니다");
@@ -130,6 +130,9 @@ public class LibraryView2 {
     }
 
     // 7 대출 중인 도서
+    //BorrowDAO에 getBorrowedBooks 만들었지만 libraryservice에서 사용하지 않음
+    // 그래서 libraryview에서 대출중인 도서 목록을 조회할 때 사용하지 못하고
+    // book리스트에서 isAvailable가 false인 걸 찾아서 출력함
     private void listBorrowedBooks() throws SQLException {
         List<Book> borrowBookList = service.getAllBooks();
         if (borrowBookList.isEmpty()) {
@@ -144,14 +147,16 @@ public class LibraryView2 {
                             b.getAuthor(),
                             "대출중");
                 }
-
             }
         }
-
     }
 
     // 6 도서 대출
     private void borrowBooks() throws SQLException {
+        if (currentStudentId == null) {
+            System.out.println("먼저 로그인해주세요. (메뉴 9번)");
+            return;
+        }
         listBooks();
         System.out.print("대출할 책 이름 : ");
         String bookName = scanner.nextLine().trim();
@@ -177,6 +182,7 @@ public class LibraryView2 {
     // 5 학생 리스트
     private void listStudents() throws SQLException {
         List<Student> studentList = service.getAllStudents();
+        System.out.println("\n=== 학생 목록 ===");
         if (studentList.isEmpty()) {
             System.out.println("등록된 학생이 없습니다");
         } else {
@@ -245,6 +251,7 @@ public class LibraryView2 {
     // 2. 도서 목록
     private void listBooks() throws SQLException {
         List<Book> bookList = service.getAllBooks();
+        System.out.println("\n=== 도서 목록 ===");
         if (bookList.isEmpty()) {
             System.out.println("등록된 도서가 없습니다");
         } else {
@@ -285,6 +292,10 @@ public class LibraryView2 {
 
         // 출판년도
         int publisherYear = readInt("출판년도: ");
+        if (publisherYear < 1 || publisherYear >java.time.LocalDate.now().getYear()){
+            System.out.println("유효한 출판년도를 입력하세요");
+            return;
+        }
 
 
         // ISBN

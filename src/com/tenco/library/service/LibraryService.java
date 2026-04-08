@@ -1,8 +1,10 @@
 package com.tenco.library.service;
 
+import com.tenco.library.dao.AdminDAO;
 import com.tenco.library.dao.BookDAO;
 import com.tenco.library.dao.BorrowDAO;
 import com.tenco.library.dao.StudentDAO;
+import com.tenco.library.dto.Admin;
 import com.tenco.library.dto.Book;
 import com.tenco.library.dto.Borrow;
 import com.tenco.library.dto.Student;
@@ -18,6 +20,7 @@ public class LibraryService {
     private final BookDAO bookDAO = new BookDAO();
     private final StudentDAO studentDAO = new StudentDAO();
     private final BorrowDAO borrowDAO = new BorrowDAO();
+    private final AdminDAO adminDAO = new AdminDAO();
 
     // 도서 추가 기능(제목, 저자 필수 검증)
     public void addBook(Book book) throws SQLException {
@@ -117,5 +120,15 @@ public class LibraryService {
     }
 
     // Todo 관리자 기능 추가 예정
+    //관리자 인증 서비스 기능 추가
+    public Admin authenticateAdmin(String adminId, String password) throws SQLException {
+        if (adminId == null || adminId.trim().isEmpty()){
+            System.out.println("관리자 ID를 입력하세요");
+        }
+        if (password == null || password.trim().isEmpty()){
+            System.out.println("관리자 password를 입력하세요");
+        }
+       return adminDAO.authenticateAdmin(adminId,password);
+    }
 
 }//end of class LibraryService
